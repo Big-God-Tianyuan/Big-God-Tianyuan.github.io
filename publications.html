@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>代表论文 · Tianyuan Yang</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f7fb;
+      --card: #ffffff;
+      --text: #1f2430;
+      --muted: #61677a;
+      --accent: #2d5cf6;
+      --accent-soft: rgba(45, 92, 246, 0.12);
+      --border: #e5e7ef;
+      --shadow: 0 24px 50px rgba(31, 36, 48, 0.08);
+      --gradient: linear-gradient(135deg, #c2ccff, #f9d7ff);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: radial-gradient(circle at top, #eef1ff 0%, #f7f7fb 35%, #ffffff 100%);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    header {
+      padding: 32px 0 24px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      padding-bottom: 4px;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .hero {
+      margin: 32px 0 24px;
+      background: var(--card);
+      border-radius: 24px;
+      padding: 28px 32px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      display: grid;
+      gap: 14px;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+    }
+
+    .hero p {
+      color: var(--muted);
+    }
+
+    .paper-list {
+      display: grid;
+      gap: 18px;
+      margin-bottom: 64px;
+    }
+
+    .paper {
+      background: var(--card);
+      padding: 20px 24px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 24px rgba(31, 36, 48, 0.05);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .paper::after {
+      content: "";
+      position: absolute;
+      inset: -40% -30% auto auto;
+      width: 160px;
+      height: 160px;
+      background: var(--gradient);
+      opacity: 0.25;
+      border-radius: 50%;
+    }
+
+    .paper:hover {
+      transform: translateY(-4px);
+      border-color: rgba(45, 92, 246, 0.35);
+      box-shadow: 0 18px 30px rgba(31, 36, 48, 0.1);
+    }
+
+    .paper h3 {
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+
+    .paper p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .paper span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+    }
+
+    .metric {
+      padding: 10px 12px;
+      background: #f5f6ff;
+      border-radius: 12px;
+      border: 1px solid #e0e4ff;
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .metric span {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .metric:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 22px rgba(45, 92, 246, 0.18);
+    }
+
+    footer {
+      padding: 24px 0 48px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="container">
+    <nav>
+      <div class="brand">Tianyuan Yang · Publications</div>
+      <div class="nav-links">
+        <a href="index.html">返回首页</a>
+        <a href="teaching.html">教学与活动</a>
+        <a href="interests.html">兴趣生活</a>
+      </div>
+    </nav>
+    <div class="hero">
+      <h1>代表论文</h1>
+      <p>以下是近年代表性成果，点击 hover 卡片可以看到高亮效果。</p>
+      <div class="metrics">
+        <div class="metric">
+          <strong>28</strong>
+          <span>代表论文</span>
+        </div>
+        <div class="metric">
+          <strong>1.6k+</strong>
+          <span>总引用</span>
+        </div>
+        <div class="metric">
+          <strong>7</strong>
+          <span>国际合作</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="paper-list">
+      <article class="paper">
+        <h3>Hybrid Models for Collective Behavior Prediction</h3>
+        <p>Nature Human Behaviour, 2024 · Collaborative modeling of large-scale behavior data.</p>
+        <span>最佳论文提名</span>
+      </article>
+      <article class="paper">
+        <h3>Measuring Trust Dynamics in Online Communities</h3>
+        <p>PNAS, 2023 · Quantifying trust formation and decay in social platforms.</p>
+        <span>开放数据集</span>
+      </article>
+      <article class="paper">
+        <h3>Understanding Information Cascades in Crisis Events</h3>
+        <p>CHI, 2022 · Modeling attention diffusion during emergencies.</p>
+        <span>交互式可视化</span>
+      </article>
+      <article class="paper">
+        <h3>Human-AI Collaboration in Policy Decisions</h3>
+        <p>ICWSM, 2021 · Aligning algorithmic advice with public policy values.</p>
+        <span>政策咨询</span>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Tianyuan Yang · Publications
+  </footer>
+</body>
+</html>

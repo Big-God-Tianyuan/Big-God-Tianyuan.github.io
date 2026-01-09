@@ -1,11 +1,452 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <title>Tianyuan Yang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>天元 · Tianyuan Yang</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f7fb;
+      --card: #ffffff;
+      --text: #1f2430;
+      --muted: #61677a;
+      --accent: #2d5cf6;
+      --accent-soft: rgba(45, 92, 246, 0.12);
+      --border: #e5e7ef;
+      --shadow: 0 24px 50px rgba(31, 36, 48, 0.08);
+      --gradient: linear-gradient(135deg, #c2ccff, #f9d7ff);
+      --gradient-strong: linear-gradient(135deg, #2d5cf6, #7a5cf6);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: radial-gradient(circle at top, #eef1ff 0%, #f7f7fb 35%, #ffffff 100%);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    header {
+      padding: 32px 0 48px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      padding-bottom: 4px;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .hero {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+      align-items: center;
+    }
+
+    .hero-card {
+      background: var(--card);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -30% -60% auto;
+      width: 240px;
+      height: 240px;
+      background: var(--gradient);
+      opacity: 0.25;
+      border-radius: 50%;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.1rem, 3vw, 2.8rem);
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: var(--gradient-strong);
+      color: #ffffff;
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 12px 24px rgba(45, 92, 246, 0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cta.secondary {
+      background: var(--accent-soft);
+      color: var(--accent);
+      box-shadow: none;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 26px rgba(45, 92, 246, 0.2);
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .tag {
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .profile {
+      display: grid;
+      gap: 16px;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: var(--gradient);
+      display: grid;
+      place-items: center;
+      font-size: 2.5rem;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .stat-grid {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+    }
+
+    .stat-card {
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: #f5f6ff;
+      border: 1px solid #e0e4ff;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+
+    .stat-card span {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 22px rgba(45, 92, 246, 0.18);
+    }
+
+    main {
+      padding-bottom: 72px;
+    }
+
+    section {
+      margin-top: 44px;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      padding: 22px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 24px rgba(31, 36, 48, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 30px rgba(31, 36, 48, 0.08);
+    }
+
+    .card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .link-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 22px;
+      background: var(--card);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 24px rgba(31, 36, 48, 0.05);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .link-card span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .link-card a {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .link-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(45, 92, 246, 0.4);
+    }
+
+    .illustration {
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      border-radius: 20px;
+      background: #f3f5ff;
+      border: 1px dashed #c9d2ff;
+      color: var(--accent);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    footer {
+      padding: 32px 0 56px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      nav {
+        justify-content: center;
+      }
+
+      .hero-card {
+        padding: 24px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello, this is my homepage</h1>
-  <p>Welcome 👋</p>
+  <header class="container">
+    <nav>
+      <div class="brand">Tianyuan Yang · 学术主页</div>
+      <div class="nav-links">
+        <a href="#about">关于我</a>
+        <a href="#research">研究方向</a>
+        <a href="publications.html">论文</a>
+        <a href="teaching.html">教学与活动</a>
+        <a href="interests.html">兴趣生活</a>
+      </div>
+    </nav>
+
+    <div class="hero">
+      <div class="hero-card">
+        <h1>你好，我是天元</h1>
+        <p>
+          计算社会科学 / 数据科学研究者，关注人类行为、社会网络与智能系统的交叉。
+          目前任职于某某大学社会与计算学院，致力于从数据中发现真实世界的模式。
+        </p>
+        <div class="tag-list">
+          <span class="tag">社会网络分析</span>
+          <span class="tag">计算传播</span>
+          <span class="tag">机器学习</span>
+          <span class="tag">复杂系统</span>
+        </div>
+        <div class="cta-group">
+          <a class="cta" href="publications.html">查看论文</a>
+          <a class="cta secondary" href="teaching.html">教学与活动</a>
+          <a class="cta secondary" href="interests.html">兴趣生活</a>
+        </div>
+        <div class="stat-grid">
+          <div class="stat-card">
+            <strong>28+</strong>
+            <span>论文与报告</span>
+          </div>
+          <div class="stat-card">
+            <strong>12</strong>
+            <span>跨学科合作</span>
+          </div>
+          <div class="stat-card">
+            <strong>6</strong>
+            <span>课程与工作坊</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card profile">
+        <div class="avatar">TY</div>
+        <div>
+          <strong>天元 · Tianyuan Yang</strong>
+          <p>副教授｜社会与计算学院</p>
+        </div>
+        <div class="contact-list">
+          <span>邮箱：tianyuan@university.edu</span>
+          <span>地址：北京市海淀区某某路 1 号</span>
+          <span>Google Scholar · ORCID · GitHub</span>
+        </div>
+        <div class="illustration">
+          <svg width="160" height="80" viewBox="0 0 160 80" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="研究示意图">
+            <rect x="6" y="18" width="42" height="42" rx="10" fill="#c2ccff"/>
+            <rect x="58" y="8" width="42" height="60" rx="12" fill="#f3b7ff"/>
+            <rect x="110" y="26" width="42" height="32" rx="8" fill="#8fd3ff"/>
+            <path d="M27 40h88" stroke="#2d5cf6" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          研究数据与协作示意
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="about">
+      <h2 class="section-title">关于我</h2>
+      <div class="card">
+        <p>
+          我主要研究数字社会中的群体行为和信息传播，结合统计建模、可视分析与实验方法，
+          探索社会结构与技术演化之间的联系。我的目标是用可解释的模型帮助人们理解复杂社会现象，
+          并与公共政策、教育科技和公益组织开展跨学科合作。
+        </p>
+      </div>
+    </section>
+
+    <section id="research">
+      <h2 class="section-title">研究方向</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>数字社会与行为建模</h3>
+          <p>关注在线社区中的协作、冲突与规范形成，构建可预测的社会动力学模型。</p>
+        </div>
+        <div class="card">
+          <h3>信息传播与舆情分析</h3>
+          <p>融合文本挖掘与传播模型，研究公共事件中的话题演化与影响力扩散。</p>
+        </div>
+        <div class="card">
+          <h3>人机协同与智能决策</h3>
+          <p>探索人类与智能系统共同决策的机制，提升高风险场景下的可靠性与公平性。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">更多跳转</h2>
+      <div class="card-grid">
+        <div class="link-card">
+          <strong>代表论文</strong>
+          <span>浏览代表性成果与论文摘要。</span>
+          <a href="publications.html">前往 Publications →</a>
+        </div>
+        <div class="link-card">
+          <strong>教学与学术活动</strong>
+          <span>课程、工作坊与学术服务。</span>
+          <a href="teaching.html">查看 Teaching →</a>
+        </div>
+        <div class="link-card">
+          <strong>兴趣与生活</strong>
+          <span>记录灵感、阅读与生活片段。</span>
+          <a href="interests.html">前往 Interests →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Tianyuan Yang · Designed with clarity & focus
+  </footer>
 </body>
 </html>
