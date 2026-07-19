@@ -1,452 +1,137 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>天元 · Tianyuan Yang</title>
-  <style>
-    :root {
-      color-scheme: light;
-      --bg: #f7f7fb;
-      --card: #ffffff;
-      --text: #1f2430;
-      --muted: #61677a;
-      --accent: #2d5cf6;
-      --accent-soft: rgba(45, 92, 246, 0.12);
-      --border: #e5e7ef;
-      --shadow: 0 24px 50px rgba(31, 36, 48, 0.08);
-      --gradient: linear-gradient(135deg, #c2ccff, #f9d7ff);
-      --gradient-strong: linear-gradient(135deg, #2d5cf6, #7a5cf6);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: "Inter", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
-      background: radial-gradient(circle at top, #eef1ff 0%, #f7f7fb 35%, #ffffff 100%);
-      color: var(--text);
-      line-height: 1.7;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      max-width: 1040px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    header {
-      padding: 32px 0 48px;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-
-    .brand {
-      font-size: 1.1rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      font-size: 0.95rem;
-      color: var(--muted);
-    }
-
-    .nav-links a {
-      padding-bottom: 4px;
-      border-bottom: 2px solid transparent;
-    }
-
-    .nav-links a:hover {
-      color: var(--accent);
-      border-color: var(--accent);
-    }
-
-    .hero {
-      margin-top: 40px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 28px;
-      align-items: center;
-    }
-
-    .hero-card {
-      background: var(--card);
-      border-radius: 24px;
-      padding: 32px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-card::after {
-      content: "";
-      position: absolute;
-      inset: auto -30% -60% auto;
-      width: 240px;
-      height: 240px;
-      background: var(--gradient);
-      opacity: 0.25;
-      border-radius: 50%;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.1rem, 3vw, 2.8rem);
-      margin-bottom: 12px;
-    }
-
-    .hero p {
-      color: var(--muted);
-      font-size: 1rem;
-    }
-
-    .cta-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 20px;
-    }
-
-    .cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      border-radius: 999px;
-      background: var(--gradient-strong);
-      color: #ffffff;
-      font-size: 0.9rem;
-      font-weight: 500;
-      box-shadow: 0 12px 24px rgba(45, 92, 246, 0.25);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .cta.secondary {
-      background: var(--accent-soft);
-      color: var(--accent);
-      box-shadow: none;
-    }
-
-    .cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 26px rgba(45, 92, 246, 0.2);
-    }
-
-    .tag-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 16px;
-    }
-
-    .tag {
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-size: 0.85rem;
-      font-weight: 500;
-    }
-
-    .profile {
-      display: grid;
-      gap: 16px;
-    }
-
-    .avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: var(--gradient);
-      display: grid;
-      place-items: center;
-      font-size: 2.5rem;
-      color: #ffffff;
-      font-weight: 600;
-    }
-
-    .contact-list {
-      display: grid;
-      gap: 8px;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .stat-grid {
-      margin-top: 18px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 12px;
-    }
-
-    .stat-card {
-      padding: 12px 14px;
-      border-radius: 16px;
-      background: #f5f6ff;
-      border: 1px solid #e0e4ff;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .stat-card strong {
-      display: block;
-      font-size: 1.05rem;
-      margin-bottom: 4px;
-    }
-
-    .stat-card span {
-      color: var(--muted);
-      font-size: 0.85rem;
-    }
-
-    .stat-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 22px rgba(45, 92, 246, 0.18);
-    }
-
-    main {
-      padding-bottom: 72px;
-    }
-
-    section {
-      margin-top: 44px;
-    }
-
-    .section-title {
-      font-size: 1.4rem;
-      margin-bottom: 16px;
-    }
-
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background: var(--card);
-      padding: 22px;
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      box-shadow: 0 12px 24px rgba(31, 36, 48, 0.05);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 18px 30px rgba(31, 36, 48, 0.08);
-    }
-
-    .card h3 {
-      font-size: 1.05rem;
-      margin-bottom: 8px;
-    }
-
-    .card p {
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .link-card {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      padding: 22px;
-      background: var(--card);
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      box-shadow: 0 12px 24px rgba(31, 36, 48, 0.05);
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .link-card span {
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .link-card a {
-      color: var(--accent);
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-
-    .link-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(45, 92, 246, 0.4);
-    }
-
-    .illustration {
-      display: grid;
-      place-items: center;
-      padding: 18px;
-      border-radius: 20px;
-      background: #f3f5ff;
-      border: 1px dashed #c9d2ff;
-      color: var(--accent);
-      font-size: 0.95rem;
-      text-align: center;
-    }
-
-    footer {
-      padding: 32px 0 56px;
-      color: var(--muted);
-      font-size: 0.9rem;
-      text-align: center;
-    }
-
-    @media (max-width: 640px) {
-      nav {
-        justify-content: center;
-      }
-
-      .hero-card {
-        padding: 24px;
-      }
-    }
-  </style>
+  <meta name="description" content="Tianyuan Yang 的个人学术主页：研究、论文、教学、项目与学术服务。">
+  <meta name="theme-color" content="#f3f0e8">
+  <title>Tianyuan Yang · Research & Practice</title>
+  <link rel="preconnect" href="https://avatars.githubusercontent.com">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <header class="container">
-    <nav>
-      <div class="brand">Tianyuan Yang · 学术主页</div>
-      <div class="nav-links">
-        <a href="#about">关于我</a>
-        <a href="#research">研究方向</a>
-        <a href="publications.html">论文</a>
-        <a href="teaching.html">教学与活动</a>
-        <a href="interests.html">兴趣生活</a>
-      </div>
-    </nav>
-
-    <div class="hero">
-      <div class="hero-card">
-        <h1>你好，我是天元</h1>
-        <p>
-          计算社会科学 / 数据科学研究者，关注人类行为、社会网络与智能系统的交叉。
-          目前任职于某某大学社会与计算学院，致力于从数据中发现真实世界的模式。
-        </p>
-        <div class="tag-list">
-          <span class="tag">社会网络分析</span>
-          <span class="tag">计算传播</span>
-          <span class="tag">机器学习</span>
-          <span class="tag">复杂系统</span>
-        </div>
-        <div class="cta-group">
-          <a class="cta" href="publications.html">查看论文</a>
-          <a class="cta secondary" href="teaching.html">教学与活动</a>
-          <a class="cta secondary" href="interests.html">兴趣生活</a>
-        </div>
-        <div class="stat-grid">
-          <div class="stat-card">
-            <strong>28+</strong>
-            <span>论文与报告</span>
-          </div>
-          <div class="stat-card">
-            <strong>12</strong>
-            <span>跨学科合作</span>
-          </div>
-          <div class="stat-card">
-            <strong>6</strong>
-            <span>课程与工作坊</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-card profile">
-        <div class="avatar">TY</div>
-        <div>
-          <strong>天元 · Tianyuan Yang</strong>
-          <p>副教授｜社会与计算学院</p>
-        </div>
-        <div class="contact-list">
-          <span>邮箱：tianyuan@university.edu</span>
-          <span>地址：北京市海淀区某某路 1 号</span>
-          <span>Google Scholar · ORCID · GitHub</span>
-        </div>
-        <div class="illustration">
-          <svg width="160" height="80" viewBox="0 0 160 80" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="研究示意图">
-            <rect x="6" y="18" width="42" height="42" rx="10" fill="#c2ccff"/>
-            <rect x="58" y="8" width="42" height="60" rx="12" fill="#f3b7ff"/>
-            <rect x="110" y="26" width="42" height="32" rx="8" fill="#8fd3ff"/>
-            <path d="M27 40h88" stroke="#2d5cf6" stroke-width="4" stroke-linecap="round"/>
-          </svg>
-          研究数据与协作示意
-        </div>
-      </div>
+  <a class="skip-link" href="#content">跳到主要内容</a>
+  <header class="site-header">
+    <div class="shell nav-wrap">
+      <a class="wordmark" href="index.html" aria-label="返回首页"><span>TY</span>Tianyuan Yang</a>
+      <button class="menu-toggle icon-button" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="打开导航">☰</button>
+      <nav id="site-nav" class="site-nav" aria-label="主导航">
+        <a class="active" href="#about">关于</a><a href="#research">研究</a><a href="publications.html">论文</a>
+        <a href="teaching.html">教学与服务</a><a href="interests.html">生活</a>
+      </nav>
+      <button class="theme-toggle icon-button" type="button" aria-label="切换深浅主题" title="切换主题">◐</button>
     </div>
+    <div class="progress" aria-hidden="true"><span></span></div>
   </header>
 
-  <main class="container">
-    <section id="about">
-      <h2 class="section-title">关于我</h2>
-      <div class="card">
-        <p>
-          我主要研究数字社会中的群体行为和信息传播，结合统计建模、可视分析与实验方法，
-          探索社会结构与技术演化之间的联系。我的目标是用可解释的模型帮助人们理解复杂社会现象，
-          并与公共政策、教育科技和公益组织开展跨学科合作。
-        </p>
+  <main id="content">
+    <section class="hero shell reveal">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot"></span>Open to research collaborations</p>
+        <h1>研究人与智能系统如何<br><em>一起学习与决策。</em></h1>
+        <p class="lede">你好，我是 <strong>Tianyuan Yang</strong>。这里将集中展示我的研究方向、代表成果、项目、教学与学术活动。当前为内容框架版，所有资料都可以逐步替换。</p>
+        <div class="actions">
+          <a class="button primary" href="#research">探索研究 <span>↓</span></a>
+          <a class="button" href="publications.html">浏览成果 <span>↗</span></a>
+        </div>
+        <div class="quick-links" aria-label="个人链接">
+          <a href="https://github.com/Big-God-Tianyuan" target="_blank" rel="noreferrer">GitHub ↗</a>
+          <a href="#">Google Scholar ↗</a><a href="#">ORCID ↗</a><a href="#contact">Email ↘</a>
+        </div>
+      </div>
+      <aside class="identity-card">
+        <div class="portrait-wrap">
+          <img src="https://avatars.githubusercontent.com/u/28728503?v=4" alt="Tianyuan Yang 的头像" width="320" height="320">
+          <span class="portrait-label">BASED IN JAPAN · GMT+9</span>
+        </div>
+        <div class="identity-meta">
+          <p>当前身份 / CURRENT ROLE</p>
+          <strong>职位与机构待补充</strong>
+          <span>研究者 · 教育者 · Builder</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="signal-strip" aria-label="主页摘要">
+      <div class="shell signal-grid">
+        <div><strong data-count="4">04</strong><span>研究主题</span></div>
+        <div><strong data-count="12">12+</strong><span>成果占位</span></div>
+        <div><strong data-count="6">06</strong><span>项目与合作</span></div>
+        <div><strong>EN · 中 · 日</strong><span>工作语言</span></div>
       </div>
     </section>
 
-    <section id="research">
-      <h2 class="section-title">研究方向</h2>
-      <div class="card-grid">
-        <div class="card">
-          <h3>数字社会与行为建模</h3>
-          <p>关注在线社区中的协作、冲突与规范形成，构建可预测的社会动力学模型。</p>
+    <section id="about" class="section shell split reveal">
+      <div class="section-index"><span>01</span><p>ABOUT</p></div>
+      <div class="section-body">
+        <p class="kicker">一份简洁但完整的自我介绍</p>
+        <h2>把个人经历连接成一条<br>清晰的研究主线。</h2>
+        <div class="two-columns prose">
+          <p>这里适合放 150–250 字的个人简介：当前职位、教育背景、长期研究问题，以及你希望产生的学术或社会影响。</p>
+          <p>第二段可以补充合作方式、跨学科背景，以及你正在寻找的学生、合作者或行业伙伴。文字准备好后可直接替换。</p>
         </div>
-        <div class="card">
-          <h3>信息传播与舆情分析</h3>
-          <p>融合文本挖掘与传播模型，研究公共事件中的话题演化与影响力扩散。</p>
-        </div>
-        <div class="card">
-          <h3>人机协同与智能决策</h3>
-          <p>探索人类与智能系统共同决策的机制，提升高风险场景下的可靠性与公平性。</p>
+        <div class="timeline" aria-label="经历时间线">
+          <article><time>NOW</time><div><strong>当前职位 / 机构</strong><p>一句话描述目前的研究与教学职责。</p></div></article>
+          <article><time>20XX</time><div><strong>博士 / 博士后经历</strong><p>学校、实验室、导师与论文方向。</p></div></article>
+          <article><time>20XX</time><div><strong>早期教育或行业经历</strong><p>与当前研究路径相关的重要起点。</p></div></article>
         </div>
       </div>
     </section>
 
-    <section>
-      <h2 class="section-title">更多跳转</h2>
-      <div class="card-grid">
-        <div class="link-card">
-          <strong>代表论文</strong>
-          <span>浏览代表性成果与论文摘要。</span>
-          <a href="publications.html">前往 Publications →</a>
-        </div>
-        <div class="link-card">
-          <strong>教学与学术活动</strong>
-          <span>课程、工作坊与学术服务。</span>
-          <a href="teaching.html">查看 Teaching →</a>
-        </div>
-        <div class="link-card">
-          <strong>兴趣与生活</strong>
-          <span>记录灵感、阅读与生活片段。</span>
-          <a href="interests.html">前往 Interests →</a>
+    <section id="research" class="section shell split reveal">
+      <div class="section-index"><span>02</span><p>RESEARCH</p></div>
+      <div class="section-body">
+        <div class="heading-row"><div><p class="kicker">研究议程</p><h2>四个可以持续扩展的<br>研究主题。</h2></div><p>点击主题展开方法、问题和关联成果。后续可将每项替换为你的真实研究方向。</p></div>
+        <div class="research-list accordion">
+          <article class="accordion-item open">
+            <button type="button" aria-expanded="true"><span class="number">01</span><span class="research-name">Human–AI Collaboration<small>人机协作与智能决策</small></span><span class="plus">−</span></button>
+            <div class="accordion-panel"><p>研究人类如何理解、使用并校准智能系统的建议，关注信任、解释、能动性与共同决策。</p><div class="chips"><span>HCI</span><span>Mixed Methods</span><span>Responsible AI</span></div></div>
+          </article>
+          <article class="accordion-item">
+            <button type="button" aria-expanded="false"><span class="number">02</span><span class="research-name">Learning Analytics<small>学习分析与教育数据</small></span><span class="plus">+</span></button>
+            <div class="accordion-panel"><p>利用行为数据理解学习过程，并将洞察转化为可解释、可行动的学习支持。</p><div class="chips"><span>EDM</span><span>Visualization</span><span>Intervention</span></div></div>
+          </article>
+          <article class="accordion-item">
+            <button type="button" aria-expanded="false"><span class="number">03</span><span class="research-name">Recommender Systems<small>个性化推荐与用户建模</small></span><span class="plus">+</span></button>
+            <div class="accordion-panel"><p>设计尊重用户目标与多样性的个性化系统，并研究交互、解释与长期效果。</p><div class="chips"><span>Personalization</span><span>UX</span><span>Knowledge Graph</span></div></div>
+          </article>
+          <article class="accordion-item">
+            <button type="button" aria-expanded="false"><span class="number">04</span><span class="research-name">Computational Social Science<small>计算社会科学</small></span><span class="plus">+</span></button>
+            <div class="accordion-panel"><p>结合计算方法与社会科学理论，理解数字环境中的行为、关系与制度。</p><div class="chips"><span>Networks</span><span>NLP</span><span>Behavior</span></div></div>
+          </article>
         </div>
       </div>
+    </section>
+
+    <section class="section shell split reveal">
+      <div class="section-index"><span>03</span><p>SELECTED WORK</p></div>
+      <div class="section-body">
+        <div class="heading-row"><div><p class="kicker">代表成果</p><h2>从论文到系统，展示<br>研究如何落地。</h2></div><a class="text-link" href="publications.html">查看全部成果 →</a></div>
+        <div class="work-grid">
+          <a class="work-card feature" href="publications.html"><span class="work-type">PAPER · 20XX</span><h3>代表论文标题占位：用一句有记忆点的标题展示核心贡献</h3><p>作者列表 · 会议或期刊 · 可加入 Best Paper、Dataset、Code 等标签。</p><span class="corner">↗</span></a>
+          <a class="work-card" href="#"><span class="work-type">PROJECT · ACTIVE</span><h3>交互式研究系统 / 数据产品</h3><p>一句话说明它服务谁、解决什么问题。</p><span class="corner">↗</span></a>
+          <a class="work-card dark" href="#"><span class="work-type">COLLABORATION</span><h3>跨学科合作项目</h3><p>展示合作机构、你的角色和预期影响。</p><span class="corner">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell split reveal">
+      <div class="section-index"><span>04</span><p>ACTIVITY</p></div>
+      <div class="section-body">
+        <div class="heading-row"><div><p class="kicker">教学与学术共同体</p><h2>不止论文，也记录<br>知识如何流动。</h2></div><a class="text-link" href="teaching.html">完整档案 →</a></div>
+        <div class="activity-grid">
+          <div><span class="activity-icon">教</span><h3>Teaching</h3><p>课程、讲义、学生指导与教学理念。</p><a href="teaching.html#teaching">浏览教学 →</a></div>
+          <div><span class="activity-icon">讲</span><h3>Talks</h3><p>受邀报告、会议演讲与公开分享。</p><a href="teaching.html#talks">查看活动 →</a></div>
+          <div><span class="activity-icon">服</span><h3>Service</h3><p>审稿、程序委员会与社群组织。</p><a href="teaching.html#service">查看服务 →</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact-section reveal">
+      <div class="shell contact-inner"><div><p class="eyebrow">LET'S CONNECT</p><h2>有一个值得一起研究的问题？</h2><p>欢迎就研究合作、学生指导、演讲邀请或数据项目联系我。</p></div><a class="button light" href="mailto:your.email@example.com">your.email@example.com <span>↗</span></a></div>
     </section>
   </main>
-
-  <footer>
-    © 2025 Tianyuan Yang · Designed with clarity & focus
-  </footer>
+  <footer class="site-footer"><div class="shell"><span>© <span data-year></span> Tianyuan Yang</span><span>Built for curiosity, clarity & collaboration.</span><a href="#content">回到顶部 ↑</a></div></footer>
 </body>
 </html>
